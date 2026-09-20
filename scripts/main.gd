@@ -3,6 +3,8 @@ extends Node2D
 const PLAYER_Y := 1048.0
 const SPAWN_Y := -56.0
 const LANE_CENTERS: Array[float] = [180.0, 360.0, 540.0]
+const HINT_AUTO_HIDE_SEC := 2.5
+const HINT_FADE_SEC := 0.4
 
 @onready var player: Area2D = $Player
 @onready var hazards: Node2D = $Hazards
@@ -22,6 +24,7 @@ var spawn_timer: float = -0.8
 var playing: bool = true
 var paused: bool = false
 var guaranteed_open_lane: int = 1
+var hint_hiding: bool = false
 
 
 func _ready() -> void:
@@ -47,6 +50,9 @@ func _process(delta: float) -> void:
 		spawn_timer = 0.0
 		_spawn_wave(_hazard_speed())
 
+	if not hint_hiding and elapsed >= HINT_AUTO_HIDE_SEC:
+		_dismiss_hint()
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -63,10 +69,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not _can_steer():
 			return
 		if event.keycode == KEY_LEFT or event.keycode == KEY_A:
-			player.move_left()
+			_steer(-1)
 			get_viewport().set_input_as_handled()
 		elif event.keycode == KEY_RIGHT or event.keycode == KEY_D:
-			player.move_right()
+			_steer(1)
 			get_viewport().set_input_as_handled()
 		return
 
@@ -84,9 +90,31 @@ func _handle_tap(screen_pos: Vector2) -> void:
 	if screen_pos.y < view.y * 0.12:
 		return
 	if screen_pos.x < view.x * 0.5:
+		_steer(-1)
+	else:
+		_steer(1)
+
+
+func _steer(direction: int) -> void:
+	var previous_lane: int = player.lane
+	if direction < 0:
 		player.move_left()
 	else:
 		player.move_right()
+	if player.lane != previous_lane:
+		_dismiss_hint()
+
+
+func _dismiss_hint() -> void:
+	if hint_hiding or hint_label == null:
+		return
+	hint_hiding = true
+	var fade := create_tween()
+	fade.tween_property(hint_label, "modulate:a", 0.0, HINT_FADE_SEC)
+	fade.finished.connect(func() -> void:
+		if is_instance_valid(hint_label):
+			hint_label.visible = false
+	)
 
 
 func _can_steer() -> bool:
