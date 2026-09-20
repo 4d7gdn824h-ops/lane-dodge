@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1lanedodgehazard"]
+
+[ext_resource type="Script" path="res://scripts/hazard.gd" id="1_hazard"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hit"]
+points = PackedVector2Array(0, -30, 30, 0, 0, 30, -30, 0)
+
+[node name="Hazard" type="Area2D"]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = true
+script = ExtResource("1_hazard")
+
+[node name="Shadow" type="Polygon2D" parent="."]
+color = Color(0.55, 0.08, 0.14, 1)
+polygon = PackedVector2Array(0, -40, 40, 0, 0, 40, -40, 0)
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.93, 0.22, 0.3, 1)
+polygon = PackedVector2Array(0, -34, 34, 0, 0, 34, -34, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_hit")
