@@ -35,6 +35,10 @@ func _ready() -> void:
 	game_over_overlay.visible = false
 	settings_overlay.visible = false
 	_update_hud()
+	if GameState.hint_seen:
+		hint_hiding = true
+		hint_label.visible = false
+		hint_label.modulate.a = 0.0
 
 
 func _process(delta: float) -> void:
@@ -109,6 +113,7 @@ func _dismiss_hint() -> void:
 	if hint_hiding or hint_label == null:
 		return
 	hint_hiding = true
+	GameState.mark_hint_seen()
 	var fade := create_tween()
 	fade.tween_property(hint_label, "modulate:a", 0.0, HINT_FADE_SEC)
 	fade.finished.connect(func() -> void:
@@ -171,6 +176,7 @@ func _on_player_died() -> void:
 	final_best_label.text = "Best  %d" % GameState.best_score
 	game_over_overlay.visible = true
 	hint_label.visible = false
+	GameState.mark_hint_seen()
 
 
 func _toggle_pause() -> void:

@@ -30,7 +30,22 @@ scenes/main.tscn       # Playable layout + HUD
 scenes/player.tscn     # Cyan rounded marker
 scenes/hazard.tscn     # Red diamond
 scripts/               # Game loop, player, hazards, best score
+docs/screenshots/      # Store-brief stills (see below)
 ```
+
+The tap hint fades after the first steer or 2.5s, then stays hidden on later runs.
+
+## Store stills
+
+Exportable 720×1280 frames of the live scene (no extra art):
+
+1. `docs/screenshots/01_title_start.png` — clean 3-lane field, tap hint, no HUD clutter
+2. `docs/screenshots/02_mid_run.png` — player in lane, 1–2 hazards, score readable
+3. `docs/screenshots/03_near_miss.png` — hazard just past the player
+4. `docs/screenshots/04_game_over_best.png` — score + best + Restart (hero)
+5. `docs/screenshots/05_pause_settings.png` — pause stub with Settings
+
+Regenerate: `godot --path . -s res://tools/capture_store_stills.gd --resolution 720x1280`
 
 Portrait viewport is 720×1280. The window stretch mode is `canvas_items` / `keep`, so it plays on a phone-shaped window or a desktop preview.
 
