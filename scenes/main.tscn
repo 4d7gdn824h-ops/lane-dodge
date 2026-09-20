@@ -1,0 +1,398 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1lanedodgemain"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://b1lanedodgeplayer" path="res://scenes/player.tscn" id="2_player"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.07, 0.1, 0.18, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.78, 0.82, 0.55)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.2, 0.86, 0.88, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.36, 0.93, 0.94, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_ghost"]
+bg_color = Color(0.16, 0.24, 0.36, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause"]
+bg_color = Color(0.1, 0.16, 0.26, 0.88)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_none"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 720.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.043, 0.07, 0.125, 1)
+
+[node name="Lanes" type="Node2D" parent="."]
+
+[node name="Lane0" type="ColorRect" parent="Lanes"]
+offset_left = 90.0
+offset_right = 270.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.07, 0.102, 0.173, 1)
+
+[node name="Lane1" type="ColorRect" parent="Lanes"]
+offset_left = 270.0
+offset_right = 450.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.082, 0.125, 0.2, 1)
+
+[node name="Lane2" type="ColorRect" parent="Lanes"]
+offset_left = 450.0
+offset_right = 630.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.07, 0.102, 0.173, 1)
+
+[node name="Divider0" type="ColorRect" parent="Lanes"]
+offset_left = 268.0
+offset_right = 272.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.2, 0.32, 0.45, 0.55)
+
+[node name="Divider1" type="ColorRect" parent="Lanes"]
+offset_left = 448.0
+offset_right = 452.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.2, 0.32, 0.45, 0.55)
+
+[node name="EdgeL" type="ColorRect" parent="Lanes"]
+offset_left = 88.0
+offset_right = 92.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.38, 0.7)
+
+[node name="EdgeR" type="ColorRect" parent="Lanes"]
+offset_left = 628.0
+offset_right = 632.0
+offset_bottom = 1280.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.38, 0.7)
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(360, 1048)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="Control" parent="HUD/UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 92.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/UI/TopBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 220.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.86, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Score  0"
+
+[node name="BestLabel" type="Label" parent="HUD/UI/TopBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.62, 0.78, 0.9, 1)
+theme_override_font_sizes/font_size = 26
+text = "Best  0"
+horizontal_alignment = 1
+
+[node name="PauseButton" type="Button" parent="HUD/UI/TopBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -28.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.86, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_pause")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pause")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_none")
+text = "II"
+
+[node name="HintLabel" type="Label" parent="HUD/UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -86.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.72, 0.84, 0.9)
+theme_override_font_sizes/font_size = 24
+text = "Tap left or right"
+horizontal_alignment = 1
+
+[node name="PauseOverlay" type="ColorRect" parent="HUD/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.04, 0.08, 0.62)
+
+[node name="Panel" type="Panel" parent="HUD/UI/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -160.0
+offset_right = 180.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/UI/PauseOverlay/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/UI/PauseOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="HUD/UI/PauseOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.12, 0.18, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_none")
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="HUD/UI/PauseOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_ghost")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_ghost")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_ghost")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_none")
+text = "Settings"
+
+[node name="GameOverOverlay" type="ColorRect" parent="HUD/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.07, 0.7)
+
+[node name="Panel" type="Panel" parent="HUD/UI/GameOverOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -190.0
+offset_right = 200.0
+offset_bottom = 190.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/UI/GameOverOverlay/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/UI/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.35, 0.4, 1)
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="FinalScore" type="Label" parent="HUD/UI/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Score  0"
+horizontal_alignment = 1
+
+[node name="FinalBest" type="Label" parent="HUD/UI/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Best  0"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="HUD/UI/GameOverOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.12, 0.18, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_none")
+text = "Restart"
+
+[node name="SettingsOverlay" type="ColorRect" parent="HUD/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.04, 0.08, 0.72)
+
+[node name="Panel" type="Panel" parent="HUD/UI/SettingsOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/UI/SettingsOverlay/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/UI/SettingsOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="HUD/UI/SettingsOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 20
+text = "Nothing here yet."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="HUD/UI/SettingsOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.12, 0.18, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_none")
+text = "Back"
+
+[connection signal="pressed" from="HUD/UI/TopBar/PauseButton" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="HUD/UI/PauseOverlay/Panel/VBox/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/UI/PauseOverlay/Panel/VBox/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HUD/UI/GameOverOverlay/Panel/VBox/RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HUD/UI/SettingsOverlay/Panel/VBox/BackButton" to="." method="_on_settings_back_pressed"]

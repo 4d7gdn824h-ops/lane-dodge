@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1lanedodgeplayer"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 30.0
+
+[node name="Player" type="Area2D"]
+collision_layer = 1
+collision_mask = 2
+monitoring = true
+monitorable = true
+script = ExtResource("1_player")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.24, 0.94, 0.95, 1)
+polygon = PackedVector2Array(-30, -20, -20, -30, 20, -30, 30, -20, 30, 20, 20, 30, -20, 30, -30, 20)
+
+[node name="Shine" type="Polygon2D" parent="."]
+color = Color(0.7, 1, 1, 0.28)
+polygon = PackedVector2Array(-16, -18, -8, -24, 10, -24, 16, -16, 6, -8, -12, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hit")
