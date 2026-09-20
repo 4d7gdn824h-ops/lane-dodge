@@ -1,0 +1,12 @@
+.godot/
+.import/
+export/
+*.translation
+*.apk
+*.aab
+*.ipa
+*.exe
+*.dmg
+*.zip
+.DS_Store
+*.swp
