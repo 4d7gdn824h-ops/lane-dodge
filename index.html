@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>Lane Dodge</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="stage">
+      <div id="frame">
+        <canvas id="game" width="720" height="1280" aria-label="Lane Dodge playfield"></canvas>
+        <div id="hud">
+          <div id="top-bar">
+            <div id="score">Score  0</div>
+            <div id="best">Best  0</div>
+            <button id="pause-btn" type="button" aria-label="Pause">II</button>
+          </div>
+          <div id="hint">Tap left or right</div>
+
+          <div id="pause-overlay" class="overlay" role="dialog" aria-label="Paused">
+            <div class="panel stack">
+              <h2>Paused</h2>
+              <button id="resume-btn" class="primary" type="button">Resume</button>
+              <button id="settings-btn" class="ghost" type="button">Settings</button>
+            </div>
+          </div>
+
+          <div id="game-over-overlay" class="overlay" role="dialog" aria-label="Game Over">
+            <div class="panel stack">
+              <h2 class="danger">Game Over</h2>
+              <p id="final-score" class="score-line">Score  0</p>
+              <p id="final-best">Best  0</p>
+              <button id="restart-btn" class="primary" type="button">Restart</button>
+            </div>
+          </div>
+
+          <div id="settings-overlay" class="overlay" role="dialog" aria-label="Settings">
+            <div class="panel stack">
+              <h2>Settings</h2>
+              <p>Nothing here yet.</p>
+              <button id="settings-back-btn" class="primary" type="button">Back</button>
+            </div>
+          </div>
+        </div>
+        <noscript>Lane Dodge needs JavaScript enabled to play.</noscript>
+      </div>
+    </div>
+    <script src="./game.js"></script>
+    <script>
+      LaneDodge.boot(document);
+    </script>
+  </body>
+</html>
