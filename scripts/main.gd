@@ -126,7 +126,7 @@ func _on_player_died() -> void:
 	if not playing:
 		return
 	playing = false
-	_set_world_frozen(true)
+	call_deferred("_set_world_frozen", true)
 	GameState.record_score(score)
 	final_score_label.text = "Score  %d" % score
 	final_best_label.text = "Best  %d" % GameState.best_score
