@@ -47,6 +47,10 @@ Exportable 720×1280 frames of the live scene (no extra art):
 
 Regenerate: `godot --path . -s res://tools/capture_store_stills.gd --resolution 720x1280`
 
+App Store Connect 6.7″ (native 1290×2796) lives in `docs/screenshots/asc-67/`. Regenerate with:
+
+`godot --path . -s res://tools/capture_store_stills.gd --resolution 1290x2796 -- --asc67`
+
 Portrait viewport is 720×1280. The window stretch mode is `canvas_items` / `keep`, so it plays on a phone-shaped window or a desktop preview.
 
 ## Out of scope (Day 1)
