@@ -18,7 +18,7 @@ const LANE_CENTERS: Array[float] = [180.0, 360.0, 540.0]
 var hazard_scene: PackedScene = preload("res://scenes/hazard.tscn")
 var score: int = 0
 var elapsed: float = 0.0
-var spawn_timer: float = 0.35
+var spawn_timer: float = -0.8
 var playing: bool = true
 var paused: bool = false
 var guaranteed_open_lane: int = 1
@@ -48,11 +48,18 @@ func _process(delta: float) -> void:
 		_spawn_wave(_hazard_speed())
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE or event.keycode == KEY_P:
-			_toggle_pause()
-			return
+			if settings_overlay.visible:
+				_on_settings_back_pressed()
+			else:
+				_toggle_pause()
+			get_viewport().set_input_as_handled()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
 		if not _can_steer():
 			return
 		if event.keycode == KEY_LEFT or event.keycode == KEY_A:
@@ -72,8 +79,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _handle_tap(screen_pos: Vector2) -> void:
 	if not _can_steer():
 		return
-	var half := get_viewport().get_visible_rect().size.x * 0.5
-	if screen_pos.x < half:
+	var view := get_viewport().get_visible_rect().size
+	# Keep the top HUD / pause row from also counting as a lane change.
+	if screen_pos.y < view.y * 0.12:
+		return
+	if screen_pos.x < view.x * 0.5:
 		player.move_left()
 	else:
 		player.move_right()
