@@ -1,6 +1,5 @@
 extends Node2D
 
-const VIEWPORT_W := 720.0
 const PLAYER_Y := 1048.0
 const SPAWN_Y := -56.0
 const LANE_CENTERS: Array[float] = [180.0, 360.0, 540.0]
